@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+    <main class="container p-5">
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>TOTAL</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="4"></td>
+                <td>{{ '${:,.2f}'.format(netWorth) }}</td>
+            </tr>
+        </tfoot>
+        <tbody>
+            {% for i in range(portLength) %}
+                {% if port[i]["SUM(Shares)"] != 0 %}
+                    <tr>
+                        <td>{{ port[i]["Symbol"] }}</td>
+                        <td>{{ port[i]["Name"] }}</td>
+                        <td>{{ port[i]["SUM(Shares)"] }}</td>
+                        <td>{{ '${:,.2f}'.format(port[i]["Price"]) }}</td>
+                        <td>{{ '${:,.2f}'.format(port[i]["Total"]) }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            <tr>
+                <td colspan="4">CASH</td>
+                <td>{{ '${:,.2f}'.format(cashLeft) }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        </main>
+
+
+{% endblock %}
